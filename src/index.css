@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 60% 99%;
+    --foreground: 20 45% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 45% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 45% 20%;
+    --primary: 22 43% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 40% 90%;
+    --secondary-foreground: 20 45% 20%;
+    --muted: 30 30% 95%;
+    --muted-foreground: 20 20% 55%;
+    --accent: 22 55% 63%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 35% 85%;
+    --input: 30 35% 85%;
+    --ring: 22 43% 39%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-bg text-brand-text;
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    color: #4A2E1B;
+    line-height: 1.4;
+  }
+
+  p {
+    line-height: 1.75;
+    color: #7A5C45;
+  }
+}
+
+@layer utilities {
+  /* Scroll animation classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-on-scroll-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .animate-on-scroll-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-on-scroll-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .animate-on-scroll-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-delay-100 { transition-delay: 100ms; }
+  .animate-delay-200 { transition-delay: 200ms; }
+  .animate-delay-300 { transition-delay: 300ms; }
+  .animate-delay-400 { transition-delay: 400ms; }
+  .animate-delay-500 { transition-delay: 500ms; }
+  .animate-delay-600 { transition-delay: 600ms; }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(232, 213, 192, 0.6);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #8B5E3C 0%, #C49A5A 50%, #8B5E3C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(135deg, #C49A5A 0%, #F0D898 50%, #C49A5A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+  }
+
+  /* WhatsApp pulse ring */
+  .wa-pulse::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    background: rgba(37, 211, 102, 0.4);
+    animation: wa-ring 2s ease-out infinite;
+  }
+
+  .wa-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 9999px;
+    background: rgba(37, 211, 102, 0.2);
+    animation: wa-ring 2s ease-out infinite 0.5s;
+  }
+
+  @keyframes wa-ring {
+    0% { transform: scale(0.9); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Shimmer loader button */
+  .shimmer-btn {
+    background: linear-gradient(90deg, #8B5E3C 0%, #C49A5A 50%, #8B5E3C 100%);
+    background-size: 200% auto;
+    animation: shimmer-move 3s linear infinite;
+  }
+
+  @keyframes shimmer-move {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  /* Decorative grain */
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Progress bar */
+  .skill-bar {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 0%;
+  }
+
+  .skill-bar-fill.active {
+    width: var(--target-width);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4A882;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5E3C;
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 94, 60, 0.2);
+  color: #4A2E1B;
+}
